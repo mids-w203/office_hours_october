@@ -1,0 +1,15 @@
+---
+title: "Thursday Office Hours"
+author: "203 team"
+date: "10/14/2021"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# t-tests and regressions 
+
+# Wilcox Rank Sum Tests 
+
