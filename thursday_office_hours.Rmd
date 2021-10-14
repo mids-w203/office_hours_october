@@ -11,5 +11,16 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # t-tests and regressions 
 
+Here's the claim: 
+
+> If we run a t-test or a regression against the same data that has a binary (or two-category) RHS feature, we will get the same answers. 
+> 
+> When we say the "same" I mean: 
+> 
+> - The same estiamte for the difference; and,
+> - The same p-value for the test. 
+
+Let's go! 
+
 # Wilcox Rank Sum Tests 
 
