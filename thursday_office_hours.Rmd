@@ -9,6 +9,11 @@ output: pdf_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+```{r load packages}
+library(tidyverse)
+```
+
+
 # t-tests and regressions 
 
 Here's the claim: 
@@ -21,6 +26,24 @@ Here's the claim:
 > - The same p-value for the test. 
 
 Let's go! 
+
+```{r make data for t-test and regression}
+d <- data.frame(
+  id = 1:100) %>% 
+  mutate(
+    x = sample(c('a', 'b'), size = 100, replace = TRUE), 
+    y = 10 + .2 * (x == 'a') + rnorm(n = 100, mean = 0, sd = 1)
+  )
+```
+
+```{r check that it does what we want}
+d %>% 
+  group_by(x) %>% 
+  summarise(
+    mean_y = mean(y)
+  ) # this checks out! 
+```
+
 
 # Wilcox Rank Sum Tests 
 
