@@ -13,3 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Wilcox Rank Sum Tests 
 
+women_weight <- c(38.9, 61.2, 73.2, 21.8, 63.4, 64.6, 48.4, 48.8, 48.5)
+men_weight <- c(67.8, 60, 63.6, 76.2, 89.4, 73.3, 67.3, 61.3, 62.4) 
+
+wilcox.test(women_weight, men_weight, conf.int = TRUE)
