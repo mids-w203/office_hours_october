@@ -9,7 +9,64 @@ output: pdf_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+```{r load packages}
+library(tidyverse)
+```
+
+
 # t-tests and regressions 
+
+Here's the claim: 
+
+> If we run a t-test or a regression against the same data that has a binary (or two-category) RHS feature, we will get the same answers. 
+> 
+> When we say the "same" I mean: 
+> 
+> - The same estiamte for the difference; and,
+> - The same p-value for the test. 
+
+Let's go! 
+
+```{r make data for t-test and regression}
+d <- data.frame(
+  id = 1:100) %>% 
+  mutate(
+    x = sample(c('a', 'b'), size = 100, replace = TRUE), 
+    y = 10 + .2 * (x == 'a') + rnorm(n = 100, mean = 0, sd = 1)
+  )
+```
+
+```{r check that it does what we want}
+d %>% 
+  group_by(x) %>% 
+  summarise(
+    mean_y = mean(y)
+  ) # this checks out! 
+```
+
+## Run a t-test 
+
+```{r t-test}
+t_test_result <- t.test(y ~ x, data = d, var.equal = TRUE)
+t_test_result
+```
+
+```{r is it symmetric?}
+diff_in_means <- t_test_result$estimate[1] - t_test_result$estimate[2]
+(t_test_result$conf.int[1] + t_test_result$conf.int[2]) / 2  == diff_in_means
+```
+
+## Run a linear model 
+
+```{r lm}
+lm_result <- lm(y ~ x, data = d)
+lm_result
+
+summary(lm_result)
+```
+
+
+
 
 # Wilcox Rank Sum Tests 
 
